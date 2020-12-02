@@ -54,7 +54,7 @@ mysqli_close($link);
         подсистемы по учету персонала</a>
 </nav>
 
-<ul class="mt-4 justify-content-center nav nav-tabs" id="myTab" role="tablist">
+<ul class="mt-5 justify-content-center nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
         <a aria-controls="Сотрудники" aria-selected="true" class="nav-link active" data-toggle="tab" href="#home" id="home-tab"
            role="tab">Сотрудники</a>
@@ -67,16 +67,32 @@ mysqli_close($link);
 
 <div class="tab-content" id="myTabContent">
     <div aria-labelledby="home-tab" class="tab-pane fade show active" id="home" role="tabpanel">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 offset-md-1">
-                    <table class="table mt-1 bg-light">
+        <div class="container" style="
+   		 margin-left: 120px;
+		">
+            <div class="row" style="overflow-x: auto;">
+                <div class="col-md-10 offset-md-1"	style="
+                   margin-left: 20px;
+                ">
+                    <table class="table table-bordered bg-light" style="
+    			margin-top: 15px;
+				">
 
                         <thead class="thead-inverse">
                         <tr>
                             <th>#</th>
-                            <th>ФИО</th>
+                            <th style="
+                            	padding-left: 115px;
+                            	padding-right: 115px;
+                            ">ФИО</th>
+                            <th style="
+                            	padding-left: 55px;
+                            	padding-right: 55px;
+                            ">Образование</th>
                             <th>Должность</th>
+                            <th>Email</th>
+                            <th>Паспорт</th>
+                            <th>Семейное положение</th>
                             <th>Телефон</th>
                         </tr>
                         </thead>
@@ -84,8 +100,12 @@ mysqli_close($link);
                         <?php foreach ($employees as $key => $employee): ?>
                             <tr>
                                 <th scope="row"><?php echo $key+1; ?></th>
-                                <td><?php echo $employee['lastName'] . " " . $employee['fistName'] . " " . $employee['middleName']?></td>
+                                <td><?php echo $employee['lastName'] . " " . $employee['firstName'] . " " . $employee['middleName']?></td>
+                                <td><?php echo $employee['education']?></td>
                                 <td><?php echo $employee['position']?></td>
+                                <td><?php echo $employee['email']?></td>
+                                <td><?php echo $employee['pass']?></td>
+                                <td><?php echo $employee['family']?></td>
                                 <td><?php echo $employee['phone']?></td>
                             </tr>
                         <?php endforeach; ?>
@@ -98,8 +118,10 @@ mysqli_close($link);
     <div aria-labelledby="profile-tab" class="tab-pane fade" id="profile" role="tabpanel">
         <div class="container">
             <div class="row">
-                <div class="col-md-10 offset-1">
-                    <section class="p-4">
+                <div class="col-sm-12 col-md-12 col-lg-12" style="
+    			margin-top: 15px;
+				">
+                    <section class="p-20">
                         <div class="card">
                             <h5 class="card-header">Создать нового пользователя</h5>
                             <div class="card-body">
@@ -108,18 +130,18 @@ mysqli_close($link);
                                         <div class="col-md-4 mb-3">
                                             <label class="" for="validationCustom01">Имя</label>
                                             <input class="form-control" id="validationCustom01" name="firstName"
-                                                   placeholder="Имя" required type="text" value="Айгуль">
+                                                   placeholder="Иван" required type="text" >
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="validationCustom02">Фамилия</label>
                                             <input class="form-control" id="validationCustom02" name="lastName"
-                                                   placeholder="Фамилия" required type="text" value="Гарифьянова">
+                                                   placeholder="Иванов" required type="text" >
 
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="validationCustom03">Отчество</label>
                                             <input class="form-control" id="validationCustom03" name="middleName"
-                                                   placeholder="Отчество" required type="text" value="Маратовна">
+                                                   placeholder="Иванович" required type="text" >
 
                                         </div>
                                     </div>
@@ -128,7 +150,7 @@ mysqli_close($link);
                                             <label for="validationCustomUsername">Email</label>
                                             <div class="input-group">
                                                 <input aria-describedby="inputGroupPrepend" class="form-control" id="validationCustomUsername"
-                                                       name="email" placeholder="Email"
+                                                       name="email" placeholder="example@gmail.com"
                                                        required type="text">
 
                                             </div>
@@ -136,7 +158,7 @@ mysqli_close($link);
                                         <div class="col-md-4 mb-3">
                                             <label for="validationCustom03">Семейное положение </label>
                                             <input aria-describedby="inputGroupPrepend" class="form-control" id="validationCustom04"
-                                                   name="family" placeholder="Семейное положение"
+                                                   name="family" placeholder="В поисках"
                                                    required type="text">
                                             <div class="invalid-feedback">
 
@@ -145,7 +167,7 @@ mysqli_close($link);
                                         <div class="col-md-4 mb-3">
                                             <label for="validationCustom06">Серия и номер паспорта</label>
                                             <input class="form-control" id="validationCustom05" name="pass"
-                                                   placeholder="Серия и номер паспорта" required type="text">
+                                                type="text" required="required" placeholder="8015-133064" pattern="[0-9]{4}-[0-9]{6}">
                                             <div class="invalid-feedback">
 
                                             </div>
@@ -156,7 +178,7 @@ mysqli_close($link);
                                         <div class="col-md-4 mb-2">
                                             <label for="validationCustom05">Телефон</label>
                                             <input class="form-control" id="validationCustom06" name="phone"
-                                                   placeholder="Телефон" type="text" value="">
+                                                   placeholder="+7-(999)-133-83-69" type="text" value="" required="required" maxlength="11">
                                             <div class="invalid-feedback">
 
                                             </div>
